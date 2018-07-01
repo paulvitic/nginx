@@ -47,6 +47,6 @@ workflows:
             branches:
               only:
                 - master
-          build_docker_image:
-            - build      
+          requires:
+            - build_docker_image      
                 
