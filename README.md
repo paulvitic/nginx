@@ -6,3 +6,4 @@
 * [A sample Docker workflow with Node.js, Redis and NGiNX](https://github.com/msanand/docker-workflow)
 * [CircleCI 2.0 Demo Application: Building Docker image](https://github.com/CircleCI-Public/circleci-demo-docker)
 * [Running Docker Commands](https://circleci.com/docs/2.0/building-docker-images/)
+* [NGINX Load Balancing - HTTP Load Balancer](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)
