@@ -19,11 +19,11 @@ jobs:
           docker build -t  paulvitic/private:$TAG .
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push paulvitic/private:$TAG
-workflows: 
+workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
+      - build:
           filters:
             branches:
               only:
