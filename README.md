@@ -12,3 +12,5 @@
 * [GCloud SDK Build Image](https://github.com/turbinelabs/gcloud-build)
 * [Kubernetes Blue/Green Deplyment Tutorial](https://github.com/ianlewis/kubernetes-bluegreen-deployment-tutorial)
 * [Orchestrating Workflows](https://circleci.com/docs/2.0/workflows/)
+* [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+* [Interactive Tutorial - Updating Your App](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-interactive/)
