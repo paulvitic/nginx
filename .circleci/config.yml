@@ -34,7 +34,7 @@ jobs:
       - run: openrc boot
       - run: | 
           TAG=$CIRCLE_BUILD_NUM.nginx
-          kubectl run hello-server --image paulvitic/private:$TAG --overrides='{"apiVersion":"v1","spec":{"imagePullSecrets":[{"name":"regcred"}]}}' --port 80
+          kubectl run hello-server --image paulvitic/private:$TAG --overrides='{"apiVersion":"extensions/v1beta1","spec":{"imagePullSecrets":[{"name":"regcred"}]}}' --port 80
 workflows:
   version: 2
   build_and_deploy:
