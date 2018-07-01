@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  build-docker-image:
+  build_docker_image:
     filters:
       branches:
         ignore:
@@ -22,9 +22,9 @@ jobs:
           docker push paulvitic/private:$TAG
 workflows:
   version: 2
-  build:
+  build_and_deploy:
     jobs:
-      - build-docker-image:
+      - build_docker_image:
           filters:
             branches:
               only:
