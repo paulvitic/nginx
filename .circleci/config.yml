@@ -29,6 +29,9 @@ jobs:
       - image: turbinelabs/gcloud-build:latest # includes docker, git and kubectl
     working_directory: /app
     steps:
+      - setup_remote_docker
+          docker_layer_caching: true
+      - run: openrc boot
       - run: | 
           TAG=$CIRCLE_BUILD_NUM.nginx
           kubectl run hello-server --image paulvitic/private:$TAG --port 80
