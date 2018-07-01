@@ -26,7 +26,7 @@ jobs:
         ignore:
           - /.*-patch-.*/
     docker:
-      - image: turbinelabs/gcloud-build:latest # includes docker, git and kubectl
+      - image: turbinelabs/gcloud-build:latest
     working_directory: /app
     steps:
       - setup_remote_docker
@@ -35,7 +35,6 @@ jobs:
       - run: | 
           TAG=$CIRCLE_BUILD_NUM.nginx
           kubectl run hello-server --image paulvitic/private:$TAG --port 80
-          
 workflows:
   version: 2
   build_and_deploy:
