@@ -20,6 +20,19 @@ jobs:
           docker build -t  paulvitic/private:$TAG .
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push paulvitic/private:$TAG
+  deploy_to_gcloud: 
+    filters:
+      branches:
+        ignore:
+          - /.*-patch-.*/
+    docker:
+      - image: turbinelabs/gcloud-build:latest # includes docker, git and kubectl
+    working_directory: /app
+    steps:
+      - run: | 
+          TAG=$CIRCLE_BUILD_NUM.nginx
+          kubectl run hello-server --image paulvitic/private:$TAG --port 80
+          
 workflows:
   version: 2
   build_and_deploy:
@@ -29,4 +42,11 @@ workflows:
             branches:
               only:
                 - master
+      - deploy_to_gcloud:
+          filters:
+            branches:
+              only:
+                - master
+          build_docker_image:
+            - build      
                 
