@@ -2,7 +2,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:17.05.0-ce-git
+      #- image: docker:17.05.0-ce-git
+      - image: turbinelabs/gcloud-build:latest # includes includes docker, git and kubectl
     working_directory: /app
     steps:
       - checkout
