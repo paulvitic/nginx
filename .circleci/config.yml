@@ -29,7 +29,7 @@ jobs:
       - image: turbinelabs/gcloud-build:latest
     working_directory: /app
     steps:
-      - setup_remote_docker
+      - setup_remote_docker:
           docker_layer_caching: true
       - run: openrc boot
       - run: | 
