@@ -11,7 +11,6 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=nginx.$CIRCLE_BUILD_NUM
-          docker push paulvitic/private:mongo
           docker build -t  paulvitic/private:$TAG .
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push paulvitic/private:$TAG
