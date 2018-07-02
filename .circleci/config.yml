@@ -2,29 +2,17 @@ version: 2
 
 jobs:
   build_docker_image:
-    filters:
-      branches:
-        ignore:
-          - /.*-patch-.*/
     docker:
-      #- image: docker:17.05.0-ce-git
       - image: turbinelabs/gcloud-build:latest # includes docker, git and kubectl
     working_directory: /app
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      # build and push Docker image
-      - run: |
-          TAG=$CIRCLE_BUILD_NUM.nginx
-          docker build -t  paulvitic/private:$TAG .
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push paulvitic/private:$TAG
-  deploy_to_gcloud: 
-    filters:
-      branches:
-        ignore:
-          - /.*-patch-.*/
+      - run: openrc boot
+      - run: docker build -t gcr.io/resplendent-fire-2839/nginx:$CIRCLE_SHA1 .
+      - run: gcloud docker -- push gcr.io/resplendent-fire-2839/nginx:$CIRCLE_SHA1
+  deploy_to_gcloud:
     docker:
       - image: turbinelabs/gcloud-build:latest
     working_directory: /app
@@ -32,9 +20,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: openrc boot
-      - run: | 
-          TAG=$CIRCLE_BUILD_NUM.nginx
-          kubectl run hello-server --image paulvitic/private:$TAG --overrides='{"apiVersion":"extensions/v1beta1","spec":{"imagePullSecrets":[{"name":"regcred"}]}}' --port 80
+      - run: kubectl run hello-server --image gcr.io/resplendent-fire-2839/nginx:$CIRCLE_SHA1 --port 80
 workflows:
   version: 2
   build_and_deploy:
