@@ -6,7 +6,8 @@ jobs:
     working_directory: /app
     steps:
       - checkout
-      - setup_remote_docker:
+      - setup_remote_docker
+      #- setup_remote_docker:
       #    docker_layer_caching: true
       - run: openrc boot
       - run: docker build -t gcr.io/resplendent-fire-2839/nginx:$CIRCLE_BUILD_NUM-$CIRCLE_SHA1 .
@@ -16,7 +17,8 @@ jobs:
       - image: turbinelabs/gcloud-build:latest
     working_directory: /app
     steps:
-      - setup_remote_docker:
+      - setup_remote_docker
+      #- setup_remote_docker:
       #    docker_layer_caching: true
       - run: openrc boot
       - run: kubectl run hello-server --image gcr.io/resplendent-fire-2839/nginx:$CIRCLE_BUILD_NUM-$CIRCLE_SHA1 --port 80
